@@ -22,7 +22,7 @@ public class ProductService {
         return pr.findAll();
     }
 
-    public ResponseEntity<?> cadastrar(ProductModel pm){
+    public ResponseEntity<?> cadastrarAlterar(ProductModel pm, String action){
         if(pm.getName().equals("")){
             rm.setMensagem("Nome do PRODUTO é OBRIGATÓRIO!");
             return new ResponseEntity<AnswerModel>(rm, HttpStatus.BAD_REQUEST);
@@ -30,7 +30,11 @@ public class ProductService {
             rm.setMensagem("Nome da MARCA é OBRIGATÓRIO!");
             return new ResponseEntity<AnswerModel>(rm, HttpStatus.BAD_REQUEST);
         } else {
-            return new ResponseEntity<ProductModel>(pr.save(pm), HttpStatus.CREATED);
+            if(action.equals("cadastrar")){
+                return new ResponseEntity<ProductModel>(pr.save(pm), HttpStatus.CREATED);
+            } else {
+                return new ResponseEntity<ProductModel>(pr.save(pm), HttpStatus.OK);
+            }
         }
 
     }
