@@ -36,6 +36,11 @@ public class ProductService {
                 return new ResponseEntity<ProductModel>(pr.save(pm), HttpStatus.OK);
             }
         }
+    }
 
+    public ResponseEntity<AnswerModel> remover(Long id){
+        pr.deleteById(id); 
+        rm.setMensagem("O Produto Foi Deletado com Sucesso!");
+        return new ResponseEntity<AnswerModel>(rm, HttpStatus.OK);
     }
 }
